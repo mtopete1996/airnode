@@ -24,6 +24,6 @@ void loop() {
 //  air.writeWeatherOnSd();
 //  air.printDustData();
 //  air.printTimes();
-  tst.printTimestamp();
-  delay(1000);
+  tst.printableLine();
+  delay(3000);
 }

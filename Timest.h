@@ -9,66 +9,59 @@
 
 class Timest { 
   
-  struct ts t;
+  int hr, mint, sec, mday, mon, yr;
   
   public:
     void setRtcTime() {
-      this->t.hour=19; 
-      this->t.min=02;
-      this->t.sec=0;
-      this->t.mday=22;
-      this->t.mon=10;
-      this->t.year=2020;
+      struct ts t;
+
+      t.hour=19; 
+      t.min=02;
+      t.sec=0;
+      t.mday=22;
+      t.mon=10;
+      t.year=2020;
     
       DS3231_set(t); 
     }
 
-    void updateRtcTime() {
+    void printTimestamp() {
       struct ts tstx;
       DS3231_get(&tstx);
 
-      this->t = tstx;
+      Serial.print("Date : ");
+      Serial.print(tstx.mday);
+      Serial.print("/");
+      Serial.print(tstx.mon);
+      Serial.print("/");
+      Serial.print(tstx.year);
+      Serial.print(" ");
+      Serial.print(tstx.hour);
+      Serial.print(":");
+      Serial.print(tstx.min);
+      Serial.print(":");
+      Serial.println(tstx.sec);
     }
 
-    String printTimestamp() {
-      updateRtcTime();
-      
-      Serial.print("Date : ");
-      Serial.print(this->t.mday);
-      Serial.print("/");    
-      Serial.print(this->t.mon);
-      Serial.print("/");
-      Serial.print(this->t.year);
-      Serial.print("\t Hour : ");
-      Serial.print(this->t.hour);
-      Serial.print(":");
-      Serial.print(this->t.min);
-      Serial.print(".");
-      Serial.println(this->t.sec); 
-    }
-    
-    int getHour() {
-      return this->t.hour;
-    }
-    
-    int getMinute() {
-      return this->t.min;
-    }
-    
-    int getSecond() {
-      return this->t.sec;
-    }
-    
-    int getMday() {
-      return this->t.mday;
-    }
-    
-    int getMonth() {
-      return this->t.mon;
-    }
-    
-    int getYear() {
-      return this->t.year;
+    String printableLine() {
+      struct ts tstx;
+      DS3231_get(&tstx);
+
+      String str = "";
+
+      str += tstx.mday;
+      str += "/";
+      str += tstx.mon;
+      str += "/";
+      str += tstx.year;
+      str += " ";
+      str += tstx.hour;
+      str += ":";
+      str += tstx.min;
+      str += ":";
+      str += tstx.sec;
+
+      return str;
     }
 };
 
