@@ -5,8 +5,5 @@
 
 #define MQ_H
 
-class Mq {
-  
-};
 
 #endif
