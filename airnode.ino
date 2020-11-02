@@ -1,29 +1,37 @@
 // #### Author: Manuel E. Topete Ortega
 // #### e-mail: manueltopt96@gmail.com
 
-#include "AirNode.h"
+#include <Wire.h>
+#include <SPI.h>
+#include <SD.h>
+#include "Dust.h"
 #include "Timest.h"
-
-Timest tst;
-//AirNode air;
+#include "Mq.h"
+#include "FileManager.h"
 
 void setup() {
-//  if (!SD.begin(D8)) {
-//    Serial.println("initialization failed!");
-//    return;
-//  }
-//  
-//  Serial.println("initialization done.");
+  if (!SD.begin(D8)) {
+    Serial.println("initialization failed!");
+    return;
+  }
+
   Wire.begin();
+  sds.begin();
+  DS3231_init(0);
   Serial.begin(9600);
 
-//  air.fm.writeFile("temperature, humidity, pressure, altitude");
+  writeFile("Timestamp, PM25, PM10, CO");
 }
 
 void loop() {
-//  air.writeWeatherOnSd();
-//  air.printDustData();
-//  air.printTimes();
-  tst.printableLine();
-  delay(3000);
+  String str = "";
+  
+  str += recordTimeStr();
+  str += ",";
+  str += recordDustStr();
+  str += ",";
+  str += recordMq();
+  writeFile(str);
+  
+  delay(1000);
 }

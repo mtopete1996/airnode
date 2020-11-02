@@ -5,8 +5,8 @@
 
 #define MQ_H
 
-class Mq {
-  
-};
+float recordMq() {
+  return analogRead(A0);
+}
 
 #endif
