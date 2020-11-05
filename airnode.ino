@@ -6,6 +6,7 @@
 #include <SD.h>
 #include "Dust.h"
 #include "Timest.h"
+#include "Mq.h"
 #include "FileManager.h"
 
 void setup() {
@@ -18,6 +19,8 @@ void setup() {
   sds.begin();
   DS3231_init(0);
   Serial.begin(9600);
+
+  writeFile("Timestamp, PM25, PM10, CO");
 }
 
 void loop() {
@@ -26,6 +29,8 @@ void loop() {
   str += recordTimeStr();
   str += ",";
   str += recordDustStr();
+  str += ",";
+  str += recordMq();
   writeFile(str);
   
   delay(1000);
