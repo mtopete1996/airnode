@@ -6,10 +6,10 @@
 #define FILE_MANAGER_H
 
 // PIN CONNECTIONS
-// CS   -> D8
-// MOSI -> D7
-// MISO -> D6
 // SCK  -> D5
+// MISO -> D6
+// MOSI -> D7
+// CS   -> D8
 
 void writeFile(String line) {
   File myFile;

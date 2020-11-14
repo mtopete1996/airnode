@@ -7,6 +7,10 @@
 
 #include <ds3231.h>
 
+// PIN CONNECTIONS
+// SCL -> D1
+// SDA -> D2
+
 struct ts tsx;
 
 String recordTimeStr(){

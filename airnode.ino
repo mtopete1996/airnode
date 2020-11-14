@@ -10,15 +10,17 @@
 #include "FileManager.h"
 
 void setup() {
+  Serial.begin(9600);
+  Serial.println("Initializing");
+  
   if (!SD.begin(D8)) {
-    Serial.println("initialization failed!");
+    Serial.println("SD initialization failed!");
     return;
   }
 
   Wire.begin();
   sds.begin();
   DS3231_init(0);
-  Serial.begin(9600);
 
   writeFile("Timestamp, PM25, PM10, CO");
 }
