@@ -34,6 +34,8 @@ void loop() {
   str += ",";
   str += recordMq();
   writeFile(str);
-  
-  delay(1000);
+
+  for (int i = 0; i < 30; i++) {
+    delay(30000);
+  }
 }
